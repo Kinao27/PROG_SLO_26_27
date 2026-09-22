@@ -20,18 +20,25 @@
 //-- librairie standard --// 
 #include <stdio.h>			// lib pour les entr�e - sortie (console - lecture clavier)
 #include <stdint.h>			// lib pour le entier normalis� 
-	// lib pour le type bool 
+#include <stdbool.h>	// lib pour le type bool 
 	// pour la gestion des chaine de caract�re
 
-//-- librairie perso --//  
+//-- librairie perso --// 
+#include "demo.h"
 
 
 //-- d�finition --// 
 #define ANNEES "26-27"
 #define VERSION 1.1
 
+const float version = 1.1; 
 
-//-- constante gloable --// 
+
+//-- constante gloable --//
+
+
+//-- déclaration type énumération -- 
+enum demo { OUVERTURE,  FERMETURE = 10, ARRET = 10 , STOP = 12344556789L};
 
 
 //----------------------------------------------------------------------------------//
@@ -45,71 +52,119 @@ void main()
 {
 	//-- variables --//
 	//--- Entier Standard 
-	//--- Sign� (+/-) ->	// possibilité de mettre le mot :  "signed" devant le type
-	char exemple1; 			// 1 octet -> en lien avec des les caractère ASCII
-	short exemple2 = 0; 	// 2 octets 
-	int exemple3; 			// 4 octets -> int ou long - /!\ en lien avec soit le uC/uP le compilateur / OS			
-	long long exemple; 		// 8 octets 
+	//--- Sign� (+/-) ->				// possibilité de mettre le mot :  "signed" devant le type
+	char tension; 						// 1 octet -> en lien avec des les caractère ASCII
+	short Rtot = 0, R1 = 0, R2 = 0; 	// 2 octets 
+	int exemple3 = 1; 					// 4 octets -> int ou long - /!\ en lien avec soit le uC/uP le compilateur / OS			
+	long long exemple = 2; 				// 8 octets 
 
-		//--- Non sign� (+) 
+	//--- Non sign� (+) 
 	unsigned char exemple1_s; 			// 1 octet -> en lien avec des les caractère ASCII
-	unsigned short exemple2_s = 0; 		// 2 octets 
-	unsigned int exemple3_s; 			// 4 octets - int ou long - /!\ en lien avec soit le uC/uP le compilateur / OS			
+	unsigned short puissance = 0; 		// 2 octets 
+	unsigned int resistance; 			// 4 octets - int ou long - /!\ en lien avec soit le uC/uP le compilateur / OS			
 	unsigned long long exemple_s; 		// 8 octets 
 
-		//--- Entier Notrmalis� -> librairie ???
-			//--- Sign� (+/-)
+	//--- Entier Notrmalis� -> librairie ???
+	//--- Sign� (+/-)
 	int8_t 	exemple1_std;		// 1 octet
 	int16_t exemple2_std;		// 2 octets 
 	int32_t exemple3_std;		// 4 octets			
 	int64_t exemple4_std;		// 8 octets 
 
 	//--- Non sign� (+) 
-		// 1 octet
-		// 2 octets 
-		// 4 octets			
-		// 8 octets 
-
-
-
+	uint8_t 	exemple1N_std = 100;		// 1 octet -> cast
+	exemple1N_std = (uint8_t)100;
+	uint16_t	exemple2n_std;		// 2 octets 
+	uint32_t	exemple3n_std;		// 4 octets			
+	uint64_t	exemple4n_std;	// 1 octet
 
 	//--- autre(s)
+	//-- bool 
+	bool exempleb; 
 
-	//---
+	//--- variable de type enum 
+	enum demo maVariable = OUVERTURE;
 
+	couleur_enum maVariabl2 = 5;
 
 	//--- Réel 
-		// 4 octets 
-		// 8 octets 
+	float exemplef1 = 3.14; 	// 4 octets 
+	double exemplef2; 			// 8 octets 
 	
+	printf("%d", sizeof(STOP));
 
-
-
-	
-	//-- appel de fonction 
-	//--- fct -> Affichage utilisateur 
-
-	//--- fct -> taille variable - constante - autre 
-
+	printf("valeur enumeration : %d", maVariabl2);
 
 	//-- opérateur mathématique 
+	exemple3 = exemple3 + exemple;
+	exemple3 = exemple3 - exemple;
+	exemple3 = exemple3 * exemple;
+	exemple3 = exemple3 / exemple;
+	exemple3 = exemple3 % exemple;
+
+	//-- opérateur mathématique -> attention aux propriétés des opérateurs 
+	Rtot = (R1 + R2) / (R1 * R2);
 
 	//-- opérateur logique -> bit à bit 
+	exemple3 = exemple3 & exemple; //ET
+	exemple3 = exemple3 | exemple;//OU 
+	exemple3 = exemple3 ^ exemple;   //XOR
+	exemple3 = ~exemple3; //INVERSEUR 
 
 	//-- opérateur de décalage
+	exemple3 = exemple3 << 1;  // à gauche -> multiplication par 2 
+	exemple3 = exemple3 >> 2;  // à gauche -> division par 2 
 
 	//-- opréateur relationnels (condition)
+	if (exemple3 && exemple) {} //ET
+	if (exemple3 || exemple) {} // OU 
 
-	// cast implicite 
+	//-- condtion - selection
+	if (exemple3 == exemple) {}  //-> égalité
+	if (exemple3 != exemple) {} //-> inégalité 
+	if (exemple3 > exemple) {}	// plus grand
+	if (exemple3 >= exemple) {} // plus grand ou égal
+	if (exemple3 < exemple) {}  // plus petit 
+	if (exemple3 <=  exemple) {}  // plus petit 
 
-	// cast explicite 
+	//-- condition vrai-faux 
+	if(exemple3 == exemple)
+	{ }
+	else
+	{}
 
-	//-- condtion - selection 
+	//-- condition vrai-faux 
+	//-- plusieurs tests 
+	if ((exemple3 == exemple) && (exemple3 != exemple))
+	{}
+	else
+	{}
+
+	//-- condition vrai-faux 
+	//-- if imbriqué 
+	if ((exemple3 == exemple))
+	{}
+	else if (exemple3 != exemple)
+	{}
+	else if (exemple3 <= exemple)
+	{}
+	else
+	{
+		if (exemple3 == exemple)
+		{}
+	}
 
 	//-- itérations 
 }
 
+//-- exemple avec la loi d'ohm 
+//--- U = R*i -> i = U/R 
 
+//-- addition de resistance en série 
+//--- Rtot = R1 + R2 + R3... 
+
+//-- mise en parallèle de résistance 
+//--- Rtot = (R1 + R2)/(R1 * R2)  
 
 
 
